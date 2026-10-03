@@ -1,5 +1,4 @@
-# AI_diabetes_detector_model
-[README (1).md](https://github.com/user-attachments/files/33007516/README.1.md)
+
 # 🩺 GlucoScan — AI-Based Diabetes Risk Prediction System
 
 > **Machine Learning for Early Diabetes Risk Prediction**

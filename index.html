@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlycoSense AI — Clinical Diabetes Risk Intelligence</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="logo-aura">
+          <img src="assets/logo.jpg" alt="Logo" class="brand-logo">
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">GlycoSense <span class="gradient-text">AI</span></h1>
+          <p class="brand-tagline">Clinical Diabetes Screening Platform</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="backend-status-pill" id="backendStatusPill">
+          <span class="status-dot pulsing" id="statusDot"></span>
+          <span class="status-label" id="statusLabel">Checking Engine...</span>
+        </div>
+        <button type="button" class="btn btn-icon-only" id="themeToggleBtn" aria-label="Toggle Theme">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-layout">
+    <!-- Quick Presets -->
+    <section class="presets-section">
+      <div class="presets-container glass-panel">
+        <div class="presets-label">⚡ Benchmark Profiles:</div>
+        <div class="presets-buttons">
+          <button type="button" class="preset-btn" data-preset="healthy">🌱 Healthy Adult</button>
+          <button type="button" class="preset-btn" data-preset="moderate">⚖️ Borderline Pre-Diabetic</button>
+          <button type="button" class="preset-btn" data-preset="high-risk">⚠️ High Risk Profile</button>
+          <button type="button" class="preset-btn btn-ghost" data-preset="defaults">↺ Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace Grid -->
+    <div class="workspace-grid">
+      <!-- Left: Form -->
+      <section class="form-column">
+        <form id="diabetesForm" class="assessment-form">
+
+          <!-- 1. Vitals -->
+          <div class="card glass-panel form-card">
+            <h2 class="card-title">1. Cardiovascular & Vitals</h2>
+            <div class="card-body grid-2">
+              <div class="form-group toggle-group">
+                <label class="form-label">High Blood Pressure</label>
+                <div class="segmented-control">
+                  <input type="radio" name="HighBP" id="highBp0" value="0" checked>
+                  <label for="highBp0">Normal (0)</label>
+                  <input type="radio" name="HighBP" id="highBp1" value="1">
+                  <label for="highBp1" class="accent-danger">High (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">High Cholesterol</label>
+                <div class="segmented-control">
+                  <input type="radio" name="HighChol" id="highChol0" value="0" checked>
+                  <label for="highChol0">Normal (0)</label>
+                  <input type="radio" name="HighChol" id="highChol1" value="1">
+                  <label for="highChol1" class="accent-danger">High (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Cholesterol Checked in 5 Yrs</label>
+                <div class="segmented-control">
+                  <input type="radio" name="CholCheck" id="cholCheck0" value="0">
+                  <label for="cholCheck0">No (0)</label>
+                  <input type="radio" name="CholCheck" id="cholCheck1" value="1" checked>
+                  <label for="cholCheck1">Yes (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Heart Disease / Attack</label>
+                <div class="segmented-control">
+                  <input type="radio" name="HeartDiseaseorAttack" id="heart0" value="0" checked>
+                  <label for="heart0">No (0)</label>
+                  <input type="radio" name="HeartDiseaseorAttack" id="heart1" value="1">
+                  <label for="heart1" class="accent-danger">Yes (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group full-width">
+                <label class="form-label">Stroke History</label>
+                <div class="segmented-control">
+                  <input type="radio" name="Stroke" id="stroke0" value="0" checked>
+                  <label for="stroke0">No Stroke (0)</label>
+                  <input type="radio" name="Stroke" id="stroke1" value="1">
+                  <label for="stroke1" class="accent-danger">Stroke Reported (1)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. BMI & Mobility -->
+          <div class="card glass-panel form-card">
+            <h2 class="card-title">2. Anthropometrics & Mobility</h2>
+            <div class="card-body">
+              <div class="form-group slider-group">
+                <div class="slider-header">
+                  <label class="form-label" for="bmiSlider">Body Mass Index (BMI)</label>
+                  <div class="slider-val-badge">
+                    <input type="number" id="bmiInput" min="12" max="65" step="0.1" value="25.0" class="num-direct-input">
+                    <span class="bmi-category-tag" id="bmiCategoryTag">Normal</span>
+                  </div>
+                </div>
+                <input type="range" id="bmiSlider" min="15" max="55" step="0.5" value="25.0" class="custom-slider">
+              </div>
+
+              <div class="form-group toggle-group mt-3">
+                <label class="form-label">Difficulty Walking or Climbing Stairs</label>
+                <div class="segmented-control">
+                  <input type="radio" name="DiffWalk" id="diffWalk0" value="0" checked>
+                  <label for="diffWalk0">No Difficulty (0)</label>
+                  <input type="radio" name="DiffWalk" id="diffWalk1" value="1">
+                  <label for="diffWalk1" class="accent-warning">Difficulty (1)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Lifestyle -->
+          <div class="card glass-panel form-card">
+            <h2 class="card-title">3. Lifestyle & Nutrition</h2>
+            <div class="card-body grid-2">
+              <div class="form-group toggle-group">
+                <label class="form-label">Physical Activity (30 Days)</label>
+                <div class="segmented-control">
+                  <input type="radio" name="PhysActivity" id="physAct0" value="0">
+                  <label for="physAct0">No (0)</label>
+                  <input type="radio" name="PhysActivity" id="physAct1" value="1" checked>
+                  <label for="physAct1" class="accent-success">Active (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Smoker (100+ Cigarettes)</label>
+                <div class="segmented-control">
+                  <input type="radio" name="Smoker" id="smoker0" value="0" checked>
+                  <label for="smoker0">No (0)</label>
+                  <input type="radio" name="Smoker" id="smoker1" value="1">
+                  <label for="smoker1" class="accent-warning">Yes (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Daily Fruit Intake</label>
+                <div class="segmented-control">
+                  <input type="radio" name="Fruits" id="fruits0" value="0">
+                  <label for="fruits0">No (0)</label>
+                  <input type="radio" name="Fruits" id="fruits1" value="1" checked>
+                  <label for="fruits1" class="accent-success">Daily (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Daily Vegetable Intake</label>
+                <div class="segmented-control">
+                  <input type="radio" name="Veggies" id="veggies0" value="0">
+                  <label for="veggies0">No (0)</label>
+                  <input type="radio" name="Veggies" id="veggies1" value="1" checked>
+                  <label for="veggies1" class="accent-success">Daily (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group full-width">
+                <label class="form-label">Heavy Alcohol Consumption</label>
+                <div class="segmented-control">
+                  <input type="radio" name="HvyAlcoholConsump" id="alcohol0" value="0" checked>
+                  <label for="alcohol0">No / Moderate (0)</label>
+                  <input type="radio" name="HvyAlcoholConsump" id="alcohol1" value="1">
+                  <label for="alcohol1" class="accent-warning">Heavy (1)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. General Health -->
+          <div class="card glass-panel form-card">
+            <h2 class="card-title">4. General Health & Well-being</h2>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">General Health Perception</label>
+                <div class="health-rating-selector">
+                  <label class="rating-btn"><input type="radio" name="GenHlth" value="1"><span class="btn-inner">🌟 1. Excellent</span></label>
+                  <label class="rating-btn"><input type="radio" name="GenHlth" value="2" checked><span class="btn-inner">✨ 2. Very Good</span></label>
+                  <label class="rating-btn"><input type="radio" name="GenHlth" value="3"><span class="btn-inner">👍 3. Good</span></label>
+                  <label class="rating-btn"><input type="radio" name="GenHlth" value="4"><span class="btn-inner">⚠️ 4. Fair</span></label>
+                  <label class="rating-btn"><input type="radio" name="GenHlth" value="5"><span class="btn-inner">🚨 5. Poor</span></label>
+                </div>
+              </div>
+
+              <div class="form-group slider-group mt-3">
+                <div class="slider-header">
+                  <label class="form-label" for="physHlthSlider">Physical Illness Days (0–30)</label>
+                  <span class="slider-val-badge mono" id="physHlthVal">0 days</span>
+                </div>
+                <input type="range" id="physHlthSlider" name="PhysHlth" min="0" max="30" value="0" class="custom-slider">
+              </div>
+
+              <div class="form-group slider-group mt-3">
+                <div class="slider-header">
+                  <label class="form-label" for="mentHlthSlider">Mental Distress Days (0–30)</label>
+                  <span class="slider-val-badge mono" id="mentHlthVal">0 days</span>
+                </div>
+                <input type="range" id="mentHlthSlider" name="MentHlth" min="0" max="30" value="0" class="custom-slider">
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Demographics -->
+          <div class="card glass-panel form-card">
+            <h2 class="card-title">5. Demographics & Access</h2>
+            <div class="card-body grid-2">
+              <div class="form-group toggle-group">
+                <label class="form-label">Biological Sex</label>
+                <div class="segmented-control">
+                  <input type="radio" name="Sex" id="sex0" value="0" checked>
+                  <label for="sex0">Female (0)</label>
+                  <input type="radio" name="Sex" id="sex1" value="1">
+                  <label for="sex1">Male (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ageSelect">Age Bracket</label>
+                <select id="ageSelect" name="Age" class="custom-select">
+                  <option value="1">18–24 years</option>
+                  <option value="2">25–29 years</option>
+                  <option value="3">30–34 years</option>
+                  <option value="4">35–39 years</option>
+                  <option value="5" selected>40–44 years</option>
+                  <option value="6">45–49 years</option>
+                  <option value="7">50–54 years</option>
+                  <option value="8">55–59 years</option>
+                  <option value="9">60–64 years</option>
+                  <option value="10">65–69 years</option>
+                  <option value="11">70–74 years</option>
+                  <option value="12">75–79 years</option>
+                  <option value="13">80+ years</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="educationSelect">Education</label>
+                <select id="educationSelect" name="Education" class="custom-select">
+                  <option value="1">1 — No School</option>
+                  <option value="2">2 — Elementary</option>
+                  <option value="3">3 — Some High School</option>
+                  <option value="4">4 — High School Grad</option>
+                  <option value="5" selected>5 — College 1-3 Yrs</option>
+                  <option value="6">6 — College Graduate</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="incomeSelect">Household Income</label>
+                <select id="incomeSelect" name="Income" class="custom-select">
+                  <option value="1">1 — < $10k</option>
+                  <option value="2">2 — $10k to $15k</option>
+                  <option value="3">3 — $15k to $20k</option>
+                  <option value="4">4 — $20k to $25k</option>
+                  <option value="5">5 — $25k to $35k</option>
+                  <option value="6" selected>6 — $35k to $50k</option>
+                  <option value="7">7 — $50k to $75k</option>
+                  <option value="8">8 — $75k or more</option>
+                </select>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Healthcare Coverage</label>
+                <div class="segmented-control">
+                  <input type="radio" name="AnyHealthcare" id="hc0" value="0">
+                  <label for="hc0">No (0)</label>
+                  <input type="radio" name="AnyHealthcare" id="hc1" value="1" checked>
+                  <label for="hc1">Insured (1)</label>
+                </div>
+              </div>
+
+              <div class="form-group toggle-group">
+                <label class="form-label">Doctor Cost Barrier</label>
+                <div class="segmented-control">
+                  <input type="radio" name="NoDocbcCost" id="docCost0" value="0" checked>
+                  <label for="docCost0">No (0)</label>
+                  <input type="radio" name="NoDocbcCost" id="docCost1" value="1">
+                  <label for="docCost1" class="accent-warning">Yes (1)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <div class="form-actions-toolbar glass-panel">
+            <button type="button" class="btn btn-primary btn-lg" id="btnCalculateRisk">
+              Calculate Diabetes Risk
+            </button>
+            <button type="button" class="btn btn-ghost" id="btnResetForm">↺ Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right: Real-time Dashboard -->
+      <section class="result-column">
+        <!-- Result Card -->
+        <div class="card glass-panel hero-result-card">
+          <div class="result-header">
+            <span class="pill-label">Risk Assessment</span>
+            <span class="source-tag" id="engineSourceTag">⚡ Checking...</span>
+          </div>
+
+          <!-- Animated Semi-Circular Gauge -->
+          <div class="gauge-wrapper">
+            <div class="gauge-container">
+              <svg class="risk-gauge-svg" viewBox="0 0 240 140">
+                <path class="gauge-track" d="M 30 130 A 90 90 0 0 1 210 130" fill="none" stroke-width="18" stroke-linecap="round"/>
+                <path class="gauge-fill" id="gaugeFillPath" d="M 30 130 A 90 90 0 0 1 210 130" fill="none" stroke-width="18" stroke-linecap="round"/>
+              </svg>
+              <div class="gauge-center-content">
+                <div class="percentage-display">
+                  <span class="counter-number" id="riskPercentValue">--</span><span class="percent-symbol">%</span>
+                </div>
+                <div class="gauge-sublabel">Risk Probability</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="classification-box">
+            <div class="risk-pill" id="riskTierPill">
+              <span class="risk-tier-text" id="riskTierText">Awaiting Assessment</span>
+            </div>
+            <p class="risk-verdict-summary" id="riskVerdictSummary">Fill in patient data to compute risk score.</p>
+          </div>
+        </div>
+
+        <!-- Contributing Factors -->
+        <div class="card glass-panel">
+          <h3 class="card-title">Diagnostic Drivers</h3>
+          <div class="card-body mt-2">
+            <div id="riskFactorsContainer" class="tag-cloud"></div>
+            <div id="protectiveFactorsContainer" class="tag-cloud mt-2"></div>
+          </div>
+        </div>
+
+        <!-- Clinical Recommendations -->
+        <div class="card glass-panel">
+          <h3 class="card-title">Clinical Next Steps</h3>
+          <div class="card-body mt-2">
+            <ul class="recommendations-list" id="recommendationsList"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
